@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | LightFeel Coffee</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #111;
+            color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .signin-container {
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            color: #c59d5f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        /* Input field */
+        .form-group input {
+            width: 80%;
+            padding: 12px 40px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            outline: none;
+            font-size: 14px;
+            background: #111;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #c59d5f;
+            box-shadow: 0 0 10px rgba(197, 157, 95, 0.4);
+        }
+
+        /* Left icon (lock/email) */
+        .form-group i.fa-lock,
+        .form-group i.fa-envelope {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            color: #c59d5f;
+            pointer-events: none;
+        }
+
+        /* Toggle password icon (eye) */
+        .form-group .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #c59d5f;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        .form-group .toggle-password:hover {
+            color: #fff;
+        }
+
+        /* Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #c59d5f;
+            color: #111;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b88a45;
+        }
+
+        /* Signup link */
+        .signup-link {
+            text-align: left;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .signup-link a {
+            color: #c59d5f;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        #closeBtn {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signin-container">
+
+        <!-- Close Button -->
+        <i class="fa-solid fa-xmark close-btn" id="closeBtn" title="Close"></i>
+
+        <h1><i class="fa-solid fa-user"></i> Sign In</h1>
+
+        <form action="process_signin.php" method="POST">
+            <!-- Email -->
+            <div class="form-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <i class="fa-solid fa-eye toggle-password" id="togglePassword" title="Show/Hide Password"></i>
+            </div>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div class="signup-link">
+            Belum punya akun? <a href="signup.php">Daftar di sini</a>
+        </div>
+
+    </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        togglePassword.addEventListener('click', () => {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            togglePassword.classList.toggle('fa-eye');
+            togglePassword.classList.toggle('fa-eye-slash');
+        });
+
+        // Set initial icon
+        togglePassword.classList.add('fa-eye');
+
+
+        // Close button
+        const closeBtn = document.getElementById('closeBtn');
+        closeBtn.addEventListener('click', () => {
+            window.location.href = '../index.html';
+        });
+    </script>
+</body>
+
+</html>
