@@ -20,6 +20,55 @@
 
     <title>Light Feel Coffee</title>
 
+     <style>
+        /* CONTAINER HUJAN KOPI */
+        .coffee-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 120px;
+            /* hanya sisi kiri */
+            height: 100vh;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* BIJI KOPI */
+        .bean {
+            filter: blur(0.3px);
+            position: absolute;
+            top: -50px;
+            width: 18px;
+            height: 18px;
+            background: radial-gradient(circle at 30% 30%, #6b3e26, #2b1a12);
+            border-radius: 50%;
+            opacity: 0.9;
+
+            animation: fall linear infinite;
+        }
+
+        /* GARIS BIJI (biar mirip kopi) */
+        .bean::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: #111;
+            left: 50%;
+            top: 4px;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* ANIMASI JATUH */
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -957,7 +1006,37 @@
 
     <script src="scripts.js"></script>
 
-    
+      <script>
+        // COFFEE RAIN EFFECT
+        const rainContainer = document.querySelector(".coffee-rain");
+
+        function createBean() {
+            const bean = document.createElement("div");
+            bean.classList.add("bean");
+
+            // posisi random di sisi kiri
+            bean.style.left = Math.random() * 100 + "px";
+
+            // ukuran random
+            const size = Math.random() * 10 + 10;
+            bean.style.width = size + "px";
+            bean.style.height = size + "px";
+
+            // durasi jatuh random
+            const duration = Math.random() * 3 + 3;
+            bean.style.animationDuration = duration + "s";
+
+            rainContainer.appendChild(bean);
+
+            // hapus setelah jatuh
+            setTimeout(() => {
+                bean.remove();
+            }, duration * 1000);
+        }
+
+        // loop hujan
+        setInterval(createBean, 300);
+    </script>
 
 </body>
 
